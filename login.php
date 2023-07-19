@@ -16,9 +16,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Perform additional validation as per your requirements
+    // Perform additional validation and sanitization as per your requirements
 
+    // Prepare the SQL statement with placeholders
     $checkUserQuery = "SELECT * FROM users WHERE username = ?";
+
+    // Check if the username exists
     $stmt = $conn->prepare($checkUserQuery);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -60,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>User Login</h1>
     <?php if (isset($error)) { ?>
         <p style="color: red;">
-            <?php echo $error; ?>
+            <?php echo htmlspecialchars($error); ?>
         </p>
     <?php } ?>
     <form method="POST" action="login.php">
