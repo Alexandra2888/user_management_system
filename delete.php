@@ -13,7 +13,6 @@ if (!isset($_SESSION['user_id'])) {
 // Get the user ID from the session
 $userId = $_SESSION['user_id'];
 
-
 // Delete the user and profile data from the database
 $deleteUserQuery = "DELETE FROM users WHERE id = ?";
 $deleteProfileQuery = "DELETE FROM profiles WHERE user_id = ?";
