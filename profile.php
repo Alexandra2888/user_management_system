@@ -22,10 +22,10 @@ $result = $stmt->get_result();
 if ($result->num_rows === 1) {
     // User profile data found, fetch and assign the information
     $profileData = $result->fetch_assoc();
-    $username = $profileData['username'];
-    $email = $profileData['email'];
-    $age = $profileData['age'];
-    $bio = $profileData['bio'];
+    $username = htmlspecialchars($profileData['username']);
+    $email = htmlspecialchars($profileData['email']);
+    $age = htmlspecialchars($profileData['age']);
+    $bio = htmlspecialchars($profileData['bio']);
 } else {
     // User profile data not found
     $username = "N/A";
