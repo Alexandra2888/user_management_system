@@ -19,23 +19,27 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $age = $_POST['age'];
     $bio = $_POST['bio'];
 
-    // Perform additional validation as per your requirements
+    // Perform additional validation and sanitization as per your requirements
 
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
 
+    // Prepare the SQL statements with placeholders
     $checkUsernameQuery = "SELECT * FROM users WHERE username = ?";
+    $insertUserQuery = "INSERT INTO users (username, password) VALUES (?, ?)";
+    $insertProfileQuery = "INSERT INTO profiles (user_id, username, email, age, bio) VALUES (?, ?, ?, ?, ?)";
+
+    // Check if the username already exists
     $stmt = $conn->prepare($checkUsernameQuery);
     $stmt->bind_param("s", $username);
     $stmt->execute();
-    $stmt->store_result();
+    $result = $stmt->get_result();
 
-    if ($stmt->num_rows > 0) {
+    if ($result->num_rows > 0) {
         // Username already exists, display an error message
         $error = "Username already exists. Please choose a different username.";
     } else {
         // Username is available, save the new user in the database
-        $insertUserQuery = "INSERT INTO users (username, password) VALUES (?, ?)";
         $stmtUser = $conn->prepare($insertUserQuery);
         $stmtUser->bind_param("ss", $username, $hashedPassword);
         $stmtUser->execute();
@@ -43,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtUser->close();
 
         // Save the profile associated with the new user
-        $insertProfileQuery = "INSERT INTO profiles (user_id, username, email, age, bio) VALUES (?, ?, ?, ?, ?)";
         $stmtProfile = $conn->prepare($insertProfileQuery);
         $stmtProfile->bind_param("issss", $userId, $username, $email, $age, $bio);
         $stmtProfile->execute();
@@ -72,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <h1>User Registration</h1>
     <?php if (isset($error)) { ?>
         <p style="color: red;">
-            <?php echo $error; ?>
+            <?php echo htmlspecialchars($error); ?>
         </p>
     <?php } ?>
     <form method="POST" action="register.php">
