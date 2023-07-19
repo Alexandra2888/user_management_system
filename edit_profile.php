@@ -1,5 +1,4 @@
 <?php
-
 include "connect.php";
 
 session_start();
@@ -9,8 +8,6 @@ if (!isset($_SESSION['user_id'])) {
     header("Location: login.php");
     exit;
 }
-
-
 
 // Get the user ID from the session
 $userId = $_SESSION['user_id'];
@@ -25,10 +22,10 @@ $result = $stmt->get_result();
 if ($result->num_rows === 1) {
     // User profile data found, fetch and assign the information
     $profileData = $result->fetch_assoc();
-    $username = $profileData['username'];
-    $email = $profileData['email'];
-    $age = $profileData['age'];
-    $bio = $profileData['bio'];
+    $username = htmlspecialchars($profileData['username']);
+    $email = htmlspecialchars($profileData['email']);
+    $age = htmlspecialchars($profileData['age']);
+    $bio = htmlspecialchars($profileData['bio']);
 } else {
     // User profile data not found
     $username = "N/A";
@@ -38,6 +35,25 @@ if ($result->num_rows === 1) {
 }
 
 $stmt->close();
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Validate and sanitize the form data
+    $newEmail = $_POST['email'];
+    $newAge = $_POST['age'];
+    $newBio = $_POST['bio'];
+
+    // Update the user's profile information in the database
+    $updateProfileQuery = "UPDATE profiles SET email = ?, age = ?, bio = ? WHERE user_id = ?";
+    $stmtUpdate = $conn->prepare($updateProfileQuery);
+    $stmtUpdate->bind_param("sssi", $newEmail, $newAge, $newBio, $userId);
+    $stmtUpdate->execute();
+
+    // Redirect to the profile page after successful update
+    header("Location: profile.php");
+    exit;
+}
+
 $conn->close();
 ?>
 
@@ -50,9 +66,9 @@ $conn->close();
 
 <body>
     <h1>Edit Profile</h1>
-    <form method="POST" action="save_profile.php">
-        <label for="fullName">Full Name:</label>
-        <input type="text" id="username" name="username" value="<?php echo $username; ?>" required>
+    <form method="POST" action="edit_profile.php">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" value="<?php echo $username; ?>" disabled>
         <br>
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" value="<?php echo $email; ?>" required>
@@ -61,9 +77,9 @@ $conn->close();
         <input type="number" id="age" name="age" value="<?php echo $age; ?>" required>
         <br>
         <label for="bio">Bio:</label>
-        <textarea id="bio" name="bio" required><?php echo $bio; ?></textarea>
+        <textarea id="bio" name="bio" rows="10" required><?php echo $bio; ?></textarea>
         <br>
-        <button type="submit">Save</button>
+        <input type="submit" value="Save">
     </form>
     <br>
     <a href="profile.php">Cancel</a>
