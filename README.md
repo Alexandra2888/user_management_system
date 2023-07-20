@@ -2,6 +2,10 @@
 
 This is a simple user management system built with PHP and MySQL. It allows users to register, login, view their profile, edit their profile, and delete their account.
 
+# Repo:
+
+https://github.com/Alexandra2888/user_management_system
+
 ## Features
 
 - User Registration: New users can create an account by providing a unique username, password, full name, email, age, and bio.
