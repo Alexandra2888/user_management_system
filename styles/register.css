@@ -1,0 +1,60 @@
+main {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h1 {
+    padding: .5em;
+}
+
+
+input {
+    width: 100%;
+    margin-bottom: 1em;
+}
+
+
+i {
+    margin: 10px;
+    color: #17729B;
+    width: 15px;
+    height: 15px;
+}
+
+ #bio {
+    display: block;
+    width: 100%;
+    resize: vertical; 
+    padding: 8px; 
+}
+
+
+ button {
+    text-align: center;
+    text-decoration: none;    
+    padding: 1em;
+    margin: 1em 5em;
+    text-transform: uppercase;
+    background-color: #3A8FC6;
+	border-radius: 28px;
+	border: 1px solid #17729B;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: Arial;
+	font-size: 17px;
+	text-decoration: none;
+	text-shadow: 0px 1px 0px #1E5E87;
+}
+
+button:hover {
+	background-color: #45A2D6;
+}
+
+button:active {
+	position: relative;
+	top: 1px;
+}
+
