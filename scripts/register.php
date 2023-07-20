@@ -1,12 +1,12 @@
 <?php
 
-require_once "connect.php";
+require_once "../connect.php";
 
 session_start();
 
-// Check if the user is already logged in, if yes, redirect to profile.php
+// Check if the user is already logged in, if yes, redirect to profile.html
 if (isset($_SESSION['user_id'])) {
-    header("Location: profile.php");
+    header("Location: ../pages/login.html");
     exit;
 }
 
@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $age = $_POST['age'];
     $bio = $_POST['bio'];
 
-    // Perform additional validation and sanitization as per your requirements
+    // Perform additional validation and sanitization 
 
     // Hash the password
     $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmtProfile->close();
 
         // Redirect to the login page after successful registration
-        header("Location: login.php");
+        header("Location: ../pages/login.html");
         exit;
     }
 
@@ -62,46 +62,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 ?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>User Management System - Register</title>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-</head>
-
-<body>
-    <h1>User Registration</h1>
-    <?php if (isset($error)) { ?>
-        <p style="color: red;">
-            <?php echo htmlspecialchars($error); ?>
-        </p>
-    <?php } ?>
-    <form method="POST" action="register.php">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <label for="full_name">Full Name:</label>
-        <input type="text" id="full_name" name="full_name" required>
-        <br>
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br>
-        <label for="age">Age:</label>
-        <input type="number" id="age" name="age" required>
-        <br>
-        <label for="bio">Bio:</label>
-        <textarea id="bio" name="bio" rows="10" required></textarea>
-        <br>
-        <input type="submit" value="Register">
-    </form>
-    <br>
-    <a href="login.php">Go to Login</a>
-    <a href="index.php">Back to Home</a>
-</body>
-
-</html>

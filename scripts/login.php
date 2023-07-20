@@ -1,12 +1,12 @@
 <?php
 
-require_once "connect.php";
+require_once "../connect.php";
 
 session_start();
 
-// Check if the user is already logged in, if yes, redirect to profile.php
+// Check if the user is already logged in, if yes, redirect to profile.html
 if (isset($_SESSION['user_id'])) {
-    header("Location: profile.php");
+    header("Location: ../pages/profile.html");
     exit;
 }
 
@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Perform additional validation and sanitization as per your requirements
+    // Perform additional validation and sanitization 
 
     // Prepare the SQL statement with placeholders
     $checkUserQuery = "SELECT * FROM users WHERE username = ?";
@@ -33,9 +33,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hashedPassword = $row['password'];
 
         if (password_verify($password, $hashedPassword)) {
-            // Password is correct, set the session and redirect to profile.php
+            // Password is correct, set the session and redirect to profile.html
             $_SESSION['user_id'] = $row['id'];
-            header("Location: profile.php");
+            header("Location: ../pages/profile.html");
             exit;
         } else {
             // Invalid password, display an error message
@@ -49,35 +49,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
     $conn->close();
 }
-
-?>
-
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>User Management System - Login</title>
-</head>
-
-<body>
-    <h1>User Login</h1>
-    <?php if (isset($error)) { ?>
-        <p style="color: red;">
-            <?php echo htmlspecialchars($error); ?>
-        </p>
-    <?php } ?>
-    <form method="POST" action="login.php">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <input type="submit" value="Login">
-    </form>
-    <br>
-    <a href="index.php">Back to Home</a>
-    <a href="register.php">Go to Register</a>
-</body>
-
-</html>

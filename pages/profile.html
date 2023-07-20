@@ -1,43 +1,3 @@
-<?php
-include "connect.php";
-
-session_start();
-
-// Check if the user is not logged in, redirect to login.php
-if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
-    exit;
-}
-
-// Get the user ID from the session
-$userId = $_SESSION['user_id'];
-
-// Fetch user profile data from the database
-$selectProfileQuery = "SELECT * FROM profiles WHERE user_id = ?";
-$stmt = $conn->prepare($selectProfileQuery);
-$stmt->bind_param("i", $userId);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if ($result->num_rows === 1) {
-    // User profile data found, fetch and assign the information
-    $profileData = $result->fetch_assoc();
-    $username = htmlspecialchars($profileData['username']);
-    $email = htmlspecialchars($profileData['email']);
-    $age = htmlspecialchars($profileData['age']);
-    $bio = htmlspecialchars($profileData['bio']);
-} else {
-    // User profile data not found
-    $username = "N/A";
-    $email = "N/A";
-    $age = "N/A";
-    $bio = "N/A";
-}
-
-$stmt->close();
-$conn->close();
-?>
-
 <!DOCTYPE html>
 <html>
 
@@ -48,24 +8,16 @@ $conn->close();
 
 <body>
     <h1>User Profile</h1>
-    <p><strong>Full Name:</strong>
-        <?php echo $username; ?>
-    </p>
-    <p><strong>Email:</strong>
-        <?php echo $email; ?>
-    </p>
-    <p><strong>Age:</strong>
-        <?php echo $age; ?>
-    </p>
-    <p><strong>Bio:</strong>
-        <?php echo $bio; ?>
-    </p>
+    <p><strong>Full Name:</strong> <span id="username"></span></p>
+    <p><strong>Email:</strong> <span id="email"></span></p>
+    <p><strong>Age:</strong> <span id="age"></span></p>
+    <p><strong>Bio:</strong> <span id="bio"></span></p>
     <br>
     <button onclick="confirmEdit()">Edit Profile</button>
     <br>
     <button onclick="confirmDelete()">Delete Account</button>
     <br>
-    <a href="logout.php">Logout</a>
+    <a href="../scripts/logout.php">Logout</a>
 
     <script>
         function confirmEdit() {
@@ -76,7 +28,7 @@ $conn->close();
                 cancelButtonText: 'No'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    window.location.href = 'edit_profile.php';
+                    window.location.href = 'edit_profile.html';
                 }
             });
         }
@@ -96,11 +48,30 @@ $conn->close();
                         text: 'Your account has been deleted.',
                         icon: 'success'
                     }).then(() => {
-                        window.location.href = 'delete.php';
+                        window.location.href = '../scripts/delete.php';
                     });
                 }
             });
         }
+
+        // Function to fetch profile data using AJAX
+        function fetchProfileData() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var profileData = JSON.parse(xhr.responseText);
+                    document.getElementById('username').textContent = profileData.username;
+                    document.getElementById('email').textContent = profileData.email;
+                    document.getElementById('age').textContent = profileData.age;
+                    document.getElementById('bio').textContent = profileData.bio;
+                }
+            };
+            xhr.open('GET', '../scripts/profile.php', true);
+            xhr.send();
+        }
+
+        // Call the function to fetch profile data on page load
+        window.onload = fetchProfileData;
     </script>
 </body>
 

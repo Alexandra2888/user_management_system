@@ -1,12 +1,12 @@
 <?php
 
-include "connect.php";
+include "../connect.php";
 
 session_start();
 
-// Check if the user is not logged in, redirect to login.php
+// Check if the user is not logged in, redirect to login.html
 if (!isset($_SESSION['user_id'])) {
-    header("Location: login.php");
+    header("Location: ../ages/login.html");
     exit;
 }
 
@@ -34,6 +34,6 @@ $conn->close();
 session_destroy();
 
 // Redirect to the register page
-header("Location: register.php");
+header("Location: ../pages/register.html");
 exit;
 ?>

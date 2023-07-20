@@ -29,6 +29,6 @@ $stmt->close();
 $conn->close();
 
 // Redirect to the profile page after saving the changes
-header("Location: profile.php");
+header("Location: ../pages/profile.html");
 exit;
 ?>
