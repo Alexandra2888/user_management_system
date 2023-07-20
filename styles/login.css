@@ -1,9 +1,21 @@
+nav {
+	display: flex;
+	justify-content: end;
+}
+
+nav a {
+	text-decoration: none;
+	color: black;
+	padding: 1em;
+	font-size: 1.3rem;
+}
+
 main {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	height: 100vh;
+	height: 75vh;
 }
 
 h1 {

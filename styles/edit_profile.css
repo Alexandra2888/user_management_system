@@ -1,3 +1,15 @@
+nav {
+    display: flex;
+    justify-content: end;
+}
+
+nav a {
+    text-decoration: none;
+    color: black;
+    padding: 1em;
+    font-size: 1.3rem;
+}
+
 main {
     display: flex;
     flex-direction: column;
@@ -55,18 +67,15 @@ button:active {
     top: 1px;
 }
 
-a {
+#cancel {
     text-align: center;
     text-decoration: none;
-    padding: 16px 31px;
-    margin: 2em;
-    /* background-color: #3a8fc6; */
-    background-color: lightslategray;
-    color: black;
+    padding: 1em;
+    margin: 1em 5em;
+    background-color: #3a8fc6;
     /* border-radius: 28px; */
     border-radius: 10px;
-    /* border: 1px solid #17729b; */
-    display: inline-block;
+    border: 1px solid #17729b;
     cursor: pointer;
     color: #ffffff;
     font-family: Arial;
@@ -75,11 +84,11 @@ a {
     text-shadow: 0px 1px 0px #1e5e87;
 }
 
-a:hover {
-    /* background-color: #45a2d6; */
+#cancel:hover {
+    background-color: #45a2d6;
 }
 
-a:active {
+#cancel:active {
     position: relative;
     top: 1px;
 }

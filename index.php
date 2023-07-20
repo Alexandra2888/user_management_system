@@ -13,12 +13,15 @@
 </head>
 
 <body>
-  <main>
-  <h1>Welcome to User Management System</h1>
+  <nav>
   <div class="container">
   <a href="pages/register.html">Register</a>
   <a href="pages/login.html">Login</a>
 </div>
+  </nav>
+  <main>
+  <h1>Welcome to User Management System</h1>
+
 </main>
 </body>
 
@@ -26,6 +29,7 @@
 
 
 <?php
+
 session_start();
 
 // Check if the user is already logged in, if yes, redirect to profile.php
