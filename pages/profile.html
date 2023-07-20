@@ -1,25 +1,29 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>User Management System - Profile</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/alert.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/alert.css">
+    <link rel="stylesheet" href="../styles/profile.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
-    <h1>User Profile</h1>
+    <main>
+    <h1> Profile</h1>
+    <div class="container">
     <p><strong>Full Name:</strong> <span id="username"></span></p>
     <p><strong>Email:</strong> <span id="email"></span></p>
     <p><strong>Age:</strong> <span id="age"></span></p>
     <p><strong>Bio:</strong> <span id="bio"></span></p>
-    <br>
+</div>
+   <div>
     <button onclick="confirmEdit()">Edit Profile</button>
-    <br>
     <button onclick="confirmDelete()">Delete Account</button>
-    <br>
+   </div>
     <a href="../scripts/logout.php">Logout</a>
+</main>
+
 
     <script>
         function confirmEdit() {

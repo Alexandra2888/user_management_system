@@ -3,31 +3,33 @@
 
 <head>
     <title>User Management System - Edit Profile</title>
-    <link rel="stylesheet" href="styles/main.css">
-    <link rel="stylesheet" href="styles/alert.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/alert.css">
+    <link rel="stylesheet" href="../styles/edit_profile.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>
 
 <body>
+    <main>
     <h1>Edit Profile</h1>
 
     <form id="editProfileForm">
-        <label for="username">Username:</label>
+        <label for="username"><i class="fas fa-user"></i>Username:</label>
         <input type="text" id="username" name="username">
         <br>
-        <label for="email">Email:</label>
+        <label for="email"><i class="fa fa-envelope" aria-hidden="true"></i>Email:</label>
         <input type="email" id="email" name="email" required>
         <br>
-        <label for="age">Age:</label>
+        <label for="age"><i class="fa fa-birthday-cake" aria-hidden="true"></i>Age:</label>
         <input type="number" id="age" name="age"  required>
         <br>
-        <label for="bio">Bio:</label>
+        <label for="bio"><i class="fa fa-info-circle" aria-hidden="true"></i>Bio:</label>
         <textarea id="bio" name="bio" rows="10" required></textarea>
         <br>
-        <input type="submit" value="Save">
+        <button id="save" type="submit">Save</button>
+        <a href="profile.html">Cancel</a>
     </form>
-    <br>
-    <a href="profile.html">Cancel</a>
-
+</main>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.getElementById('editProfileForm').addEventListener('submit', function (event) {

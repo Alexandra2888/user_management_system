@@ -3,28 +3,34 @@
 
 <head>
     <title>User Management System - Login</title>
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/login.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
 </head>
 
 <body>
-    <h1>User Login</h1>
+    <main>
+    <h1>Login</h1>
     <?php if (isset($error)) { ?>
         <p style="color: red;">
             <?php echo htmlspecialchars($error); ?>
         </p>
     <?php } ?>
     <form method="POST" action="../scripts/login.php">
-        <label for="username">Username:</label>
+        <label for="username"><i class="fas fa-user"></i>Username:</label>
         <input type="text" id="username" name="username" required>
         <br>
-        <label for="password">Password:</label>
+        <label for="password"><i class="fas fa-lock"></i>Password:</label>
         <input type="password" id="password" name="password" required>
         <br>
-        <input type="submit" value="Login">
+        <button type="submit" id="login">Submit</button>
     </form>
-    <br>
-    <a href="../index.php">Back to Home</a>
-    <a href="register.html">Go to Register</a>
+    <div>
+        <a href="../index.php">Back to Home</a>
+        <a href="register.html">Go to Register</a>
+    </div>
+ 
+</main>
 </body>
 
 </html>
