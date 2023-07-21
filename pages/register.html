@@ -1,50 +1,87 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>User Management System - Register</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="User profile.">
+    <title>User Management System - Profile</title>
     <link rel="stylesheet" href="../styles/main.css">
-    <link rel="stylesheet" href="../styles/register.css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css">
+    <link rel="stylesheet" href="../styles/alert.css">
+    <link rel="stylesheet" href="../styles/profile.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
     <nav>
-        <a href="login.html">Login</a>
-        <a href="../index.php">Home</a>
+        <a href="../scripts/logout.php">Logout</a>
     </nav>
     <main>
-    <h1>Register</h1>
-    <?php if (isset($error)) { ?>
-        <p style="color: red;">
-            <?php echo htmlspecialchars($error); ?>
-        </p>
-    <?php } ?>
-    <form method="POST" action="../scripts/register.php">
-        <label for="username"><i class="fas fa-user"></i>Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password"><i class="fas fa-lock"></i>Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <label for="full_name"><i class="fas fa-user"></i>Full Name:</label>
-        <input type="text" id="full_name" name="full_name" required>
-        <br>
-        <label for="email"><i class="fa fa-envelope" aria-hidden="true"></i>
-            Email:</label>
-        <input type="email" id="email" name="email" required>
-        <br>
-        <label for="age"><i class="fa fa-birthday-cake" aria-hidden="true"></i>Age:</label>
-        <input type="number" id="age" name="age" required>
-        <br>
-        <label for="bio"><i class="fa fa-info-circle" aria-hidden="true"></i>
-            Bio:</label>
-        <textarea id="bio" name="bio" rows="10" required></textarea>
-        <br>
-        <button type="submit" id="submit">Submit</button>
-    </form>
-    <br>
-</main>
+        <h1>Profile</h1>
+        <div class="container">
+            <p><strong>Full Name:</strong> <span id="username"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Age:</strong> <span id="age"></span></p>
+            <p><strong>Bio:</strong> <span id="bio"></span></p>
+        </div>
+        <div>
+            <button onclick="confirmEdit()">Edit Profile</button>
+            <button onclick="confirmDelete()">Delete Account</button>
+        </div>
+    </main>
+
+    <script>
+        function confirmEdit() {
+            Swal.fire({
+                title: 'Do you want to edit your profile?',
+                showCancelButton: true,
+                confirmButtonText: 'Yes',
+                cancelButtonText: 'No'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = 'edit_profile.html';
+                }
+            });
+        }
+
+        function confirmDelete() {
+            Swal.fire({
+                title: 'Are you sure you want to delete your account?',
+                text: 'This action cannot be undone!',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Yes, delete my account',
+                cancelButtonText: 'No, cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire({
+                        title: 'Account Deleted',
+                        text: 'Your account has been deleted.',
+                        icon: 'success'
+                    }).then(() => {
+                        window.location.href = '../scripts/delete.php';
+                    });
+                }
+            });
+        }
+
+        function fetchProfileData() {
+            var xhr = new XMLHttpRequest();
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    var profileData = JSON.parse(xhr.responseText);
+                    document.getElementById('username').textContent = profileData.username;
+                    document.getElementById('email').textContent = profileData.email;
+                    document.getElementById('age').textContent = profileData.age;
+                    document.getElementById('bio').textContent = profileData.bio;
+                }
+            };
+            xhr.open('GET', '../scripts/profile.php', true);
+            xhr.send();
+        }
+
+        window.onload = fetchProfileData;
+    </script>
 </body>
 
 </html>

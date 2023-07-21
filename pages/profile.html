@@ -1,6 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
+
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="User profile.">
     <title>User Management System - Profile</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/alert.css">
@@ -9,23 +13,22 @@
 </head>
 
 <body>
-  <nav>
-    <a href="../scripts/logout.php">Logout</a>
-  </nav>
+    <nav>
+        <a href="../scripts/logout.php">Logout</a>
+    </nav>
     <main>
-    <h1> Profile</h1>
-    <div class="container">
-    <p><strong>Full Name:</strong> <span id="username"></span></p>
-    <p><strong>Email:</strong> <span id="email"></span></p>
-    <p><strong>Age:</strong> <span id="age"></span></p>
-    <p><strong>Bio:</strong> <span id="bio"></span></p>
-</div>
-   <div>
-    <button onclick="confirmEdit()">Edit Profile</button>
-    <button onclick="confirmDelete()">Delete Account</button>
-   </div>
-</main>
-
+        <h1>Profile</h1>
+        <div class="container">
+            <p><strong>Full Name:</strong> <span id="username"></span></p>
+            <p><strong>Email:</strong> <span id="email"></span></p>
+            <p><strong>Age:</strong> <span id="age"></span></p>
+            <p><strong>Bio:</strong> <span id="bio"></span></p>
+        </div>
+        <div>
+            <button onclick="confirmEdit()">Edit Profile</button>
+            <button onclick="confirmDelete()">Delete Account</button>
+        </div>
+    </main>
 
     <script>
         function confirmEdit() {
@@ -62,7 +65,6 @@
             });
         }
 
-        // Function to fetch profile data using AJAX
         function fetchProfileData() {
             var xhr = new XMLHttpRequest();
             xhr.onreadystatechange = function () {
@@ -78,7 +80,6 @@
             xhr.send();
         }
 
-        // Call the function to fetch profile data on page load
         window.onload = fetchProfileData;
     </script>
 </body>

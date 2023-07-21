@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Login page.">
     <title>User Management System - Login</title>
     <link rel="stylesheet" href="../styles/main.css">
     <link rel="stylesheet" href="../styles/login.css">
@@ -10,26 +13,26 @@
 
 <body>
     <nav>
-        <a href="../index.php"> Home</a>
+        <a href="../index.php">Home</a>
         <a href="register.html">Register</a>
     </nav>
     <main>
-    <h1>Login</h1>
-    <?php if (isset($error)) { ?>
-        <p style="color: red;">
-            <?php echo htmlspecialchars($error); ?>
-        </p>
-    <?php } ?>
-    <form method="POST" action="../scripts/login.php">
-        <label for="username"><i class="fas fa-user"></i>Username:</label>
-        <input type="text" id="username" name="username" required>
-        <br>
-        <label for="password"><i class="fas fa-lock"></i>Password:</label>
-        <input type="password" id="password" name="password" required>
-        <br>
-        <button type="submit" id="login">Submit</button>
-    </form>
-  </main>
+        <h1>Login</h1>
+        <?php if (isset($error)) { ?>
+            <p style="color: red;">
+                <?php echo htmlspecialchars($error); ?>
+            </p>
+        <?php } ?>
+        <form method="POST" action="../scripts/login.php">
+            <label for="username"><i class="fas fa-user"></i>Username:</label>
+            <input type="text" id="username" name="username" required>
+            <br>
+            <label for="password"><i class="fas fa-lock"></i>Password:</label>
+            <input type="password" id="password" name="password" required>
+            <br>
+            <button type="submit" id="login">Submit</button>
+        </form>
+    </main>
 </body>
 
 </html>

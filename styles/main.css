@@ -1,5 +1,26 @@
-*, *::after, *::before {
+*,
+*::after,
+*::before {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body {
+    height: 100vh;
+}
+
+
+:root{
+
+    /*colors*/
+    --white:#ffffff;
+    --light:#d3d3d3;
+    --lightBlue:#1e5e87;
+    --mediumBlue:#3a8fc6;
+    --darkBlue: #17729b;
+    --hoverBtn:#45a2d6;
+    --lightGray: #808080;
+    --darkGray:#708090;
+    --black:#000000;
 }

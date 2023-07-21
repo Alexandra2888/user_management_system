@@ -1,4 +1,4 @@
 .swal2-confirm {
-    background-color: #17729b !important;
+    background-color: var(--darkBlue) !important;
     border: none !important;
 }
