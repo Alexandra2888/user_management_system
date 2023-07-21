@@ -16,12 +16,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Perform additional validation and sanitization 
+    // Perform additional validation and sanitization as per your requirements
 
+    // Authenticate user
+    $error = authenticateUser($conn, $username, $password);
+
+    if (!$error) {
+        // Redirect to profile.html if authentication is successful
+        header("Location: ../pages/profile.html");
+        exit;
+    }
+}
+
+function authenticateUser($conn, $username, $password)
+{
     // Prepare the SQL statement with placeholders
     $checkUserQuery = "SELECT * FROM users WHERE username = ?";
-
-    // Check if the username exists
     $stmt = $conn->prepare($checkUserQuery);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -33,19 +43,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hashedPassword = $row['password'];
 
         if (password_verify($password, $hashedPassword)) {
-            // Password is correct, set the session and redirect to profile.html
+            // Password is correct, set the session and return null for no error
             $_SESSION['user_id'] = $row['id'];
-            header("Location: ../pages/profile.html");
-            exit;
+            return null;
         } else {
-            // Invalid password, display an error message
-            $error = "Invalid password. Please try again.";
+            // Invalid password, return error message
+            return "Invalid password. Please try again.";
         }
     } else {
-        // Invalid username, display an error message
-        $error = "Invalid username. Please try again.";
+        // Invalid username, return error message
+        return "Invalid username. Please try again.";
     }
 
     $stmt->close();
-    $conn->close();
+    return null;
 }
+
+$conn->close();
+?>

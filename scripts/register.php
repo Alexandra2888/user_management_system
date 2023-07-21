@@ -4,14 +4,18 @@ require_once "../connect.php";
 
 session_start();
 
-// Check if the user is already logged in, if yes, redirect to profile.html
-if (isset($_SESSION['user_id'])) {
-    header("Location: ../pages/login.html");
-    exit;
+// Function to check if the user is already logged in
+function checkLoggedIn()
+{
+    if (isset($_SESSION['user_id'])) {
+        header("Location: ../pages/login.html");
+        exit;
+    }
 }
 
-// Check if the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+// Function to process the form data and register the new user
+function registerUser($conn)
+{
     // Validate and sanitize the form data
     $password = $_POST['password'];
     $username = $_POST['username'];
@@ -58,7 +62,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     $stmt->close();
-    $conn->close();
 }
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    checkLoggedIn();
+    registerUser($conn);
+}
+
+$conn->close();
 
 ?>

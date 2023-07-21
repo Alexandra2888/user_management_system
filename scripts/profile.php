@@ -12,36 +12,45 @@ include "../connect.php";
 // Get the user ID from the session
 $userId = $_SESSION['user_id'];
 
-// Fetch user profile data from the database
-$selectProfileQuery = "SELECT * FROM profiles WHERE user_id = ?";
-$stmt = $conn->prepare($selectProfileQuery);
-$stmt->bind_param("i", $userId);
-$stmt->execute();
-$result = $stmt->get_result();
+// Function to fetch user profile data from the database
+function fetchUserProfileData($conn, $userId)
+{
+    $selectProfileQuery = "SELECT * FROM profiles WHERE user_id = ?";
+    $stmt = $conn->prepare($selectProfileQuery);
+    $stmt->bind_param("i", $userId);
+    $stmt->execute();
+    $result = $stmt->get_result();
 
-if ($result->num_rows === 1) {
-    // User profile data found, fetch and assign the information
-    $profileData = $result->fetch_assoc();
-    $username = htmlspecialchars($profileData['username']);
-    $email = htmlspecialchars($profileData['email']);
-    $age = htmlspecialchars($profileData['age']);
-    $bio = htmlspecialchars($profileData['bio']);
-} else {
-    // User profile data not found
-    $username = "N/A";
-    $email = "N/A";
-    $age = "N/A";
-    $bio = "N/A";
+    if ($result->num_rows === 1) {
+        // User profile data found, fetch and assign the information
+        $profileData = $result->fetch_assoc();
+        $username = htmlspecialchars($profileData['username']);
+        $email = htmlspecialchars($profileData['email']);
+        $age = htmlspecialchars($profileData['age']);
+        $bio = htmlspecialchars($profileData['bio']);
+    } else {
+        // User profile data not found
+        $username = "N/A";
+        $email = "N/A";
+        $age = "N/A";
+        $bio = "N/A";
+    }
+
+    $stmt->close();
+
+    return [
+        'username' => $username,
+        'email' => $email,
+        'age' => $age,
+        'bio' => $bio,
+    ];
 }
 
-$stmt->close();
+// Fetch user profile data
+$profileData = fetchUserProfileData($conn, $userId);
+
 $conn->close();
 
 // Return the profile data as JSON
-echo json_encode([
-    'username' => $username,
-    'email' => $email,
-    'age' => $age,
-    'bio' => $bio,
-]);
+echo json_encode($profileData);
 ?>

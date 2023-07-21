@@ -3,23 +3,8 @@ include "../connect.php";
 
 session_start();
 
-// Check if the user is not logged in, redirect to login.php
-if (!isset($_SESSION['user_id'])) {
-    header("Location: ../pages/login.php");
-    exit;
-}
-
-// Get the user ID from the session
-$userId = $_SESSION['user_id'];
-
-// Check if the form is submitted using AJAX
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
-    // Validate and sanitize the form data
-    $newEmail = $_POST['email'];
-    $newAge = $_POST['age'];
-    $newBio = $_POST['bio'];
-
-    // Update the user's profile information in the database
+// Function to update user's profile information in the database
+function updateProfile($conn, $userId, $newEmail, $newAge, $newBio) {
     $updateProfileQuery = "UPDATE profiles SET email = ?, age = ?, bio = ? WHERE user_id = ?";
     $stmtUpdate = $conn->prepare($updateProfileQuery);
     $stmtUpdate->bind_param("sssi", $newEmail, $newAge, $newBio, $userId);
@@ -56,11 +41,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WI
         $response['success'] = false;
     }
 
+    $stmtUpdate->close();
+
     // Send the response as JSON
     header('Content-Type: application/json');
     echo json_encode($response);
+}
 
-    $stmtUpdate->close();
+// Check if the user is not logged in, redirect to login.php
+if (!isset($_SESSION['user_id'])) {
+    header("Location: ../pages/login.php");
+    exit;
+}
+
+// Check if the form is submitted using AJAX
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) === 'xmlhttprequest') {
+    // Validate and sanitize the form data
+    $newEmail = $_POST['email'];
+    $newAge = $_POST['age'];
+    $newBio = $_POST['bio'];
+
+    // Update the user's profile information in the database
+    updateProfile($conn, $_SESSION['user_id'], $newEmail, $newAge, $newBio);
+
     exit; // End the script, no further processing needed
 }
 
