@@ -6,21 +6,54 @@
     box-sizing: border-box;
 }
 
-body {
-    height: 100vh;
+:root {
+    --white: #ffffff;
+    --light: #d3d3d3;
+    --lightBlue: #1e5e87;
+    --mediumBlue: #3a8fc6;
+    --darkBlue: #17729b;
+    --hoverBtn: #45a2d6;
+    --lightGray: #808080;
+    --darkGray: #708090;
+    --black: #000000;
 }
 
+body {
+    height: 100vh;
+    font-family: "Roboto", sans-serif;
+    line-height: 1.1;
+}
 
-:root{
+/*utility classes*/
 
-    /*colors*/
-    --white:#ffffff;
-    --light:#d3d3d3;
-    --lightBlue:#1e5e87;
-    --mediumBlue:#3a8fc6;
-    --darkBlue: #17729b;
-    --hoverBtn:#45a2d6;
-    --lightGray: #808080;
-    --darkGray:#708090;
-    --black:#000000;
+.i {
+    margin: 0.625rem;
+    color: var(--darkBlue);
+    width: 0.9375rem;
+    height: 0.9375rem;
+}
+
+.btn {
+    text-align: center;
+    text-decoration: none;
+    padding: 1em 3.5em;
+    margin: 0.5em 8em;
+    background-color: var(--mediumBlue);
+    border-radius: 0.625rem;
+    border: 1px solid var(--darkBlue);
+    cursor: pointer;
+    color: var(--white);
+    text-decoration: none;
+    font-size: 1.0625rem;
+
+    text-shadow: 0px 1px 0px var(--lightBlue);
+}
+
+.btn:hover {
+    background-color: var(--hoverBtn);
+}
+
+.btn:active {
+    position: relative;
+    top: 1px;
 }

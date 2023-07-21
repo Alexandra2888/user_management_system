@@ -13,26 +13,26 @@
 </head>
 
 <body>
-    <nav>
-        <a href="../scripts/logout.php">Logout</a>
+    <nav class="navigation">
+        <a href="../scripts/logout.php" class="navigation__link">Logout</a>
     </nav>
-    <main>
-        <h1>Edit Profile</h1>
+    <main class="container">
+        <h1 class="container__title">Edit Profile</h1>
 
         <form id="editProfileForm">
             <label for="username"><i class="fas fa-user"></i>Username:</label>
             <input type="text" id="username" name="username" required>
             <br>
-            <label for="email"><i class="fa fa-envelope" aria-hidden="true"></i>Email:</label>
+            <label for="email"><i class="fa fa-envelope i" aria-hidden="true"></i>Email:</label>
             <input type="email" id="email" name="email" required>
             <br>
-            <label for="age"><i class="fa fa-birthday-cake" aria-hidden="true"></i>Age:</label>
+            <label for="age"><i class="fa fa-birthday-cake i" aria-hidden="true"></i>Age:</label>
             <input type="number" id="age" name="age" required>
             <br>
-            <label for="bio"><i class="fa fa-info-circle" aria-hidden="true"></i>Bio:</label>
+            <label for="bio"><i class="fa fa-info-circle i" aria-hidden="true"></i>Bio:</label>
             <textarea id="bio" name="bio" rows="10" required></textarea>
             <br>
-            <button id="save" type="submit">Save</button>
+            <button class="btn" id="save" type="submit">Save</button>
             <a href="profile.html" id="cancel">Cancel</a>
         </form>
     </main>

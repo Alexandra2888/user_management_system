@@ -1,24 +1,65 @@
-nav {
+.navigation {
     display: flex;
     justify-content: end;
-}
-
-nav a {
-    text-decoration: none;
-    color: black;
     padding: 1em;
-    font-size: 1.3rem;
 }
 
-main {
+.navigation__links {
+    text-decoration: none;
+    color: var(--black);
+    font-size: 1.1rem;
+    position: relative;
+    padding: 0.5rem;
+    margin: 0.5rem;
+}
+
+.navigation__links:last-child {
+    padding-right: 3.5em;
+}
+
+.navigation__links:link::before,
+.navigation__links:visited::before,
+.navigation__links:link::after,
+.navigation__links:visited::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--darkBlue);
+
+    transform: scaleX(0);
+
+    transition: transform 0.6s cubic-bezier(1, 0, 0, 1);
+}
+
+.navigation__links:link::before,
+.navigation__links:visited::before {
+    top: 0;
+    transform-origin: left;
+}
+
+.navigation__links:link::after,
+.navigation__links:visited::after {
+    bottom: 0;
+    transform-origin: right;
+}
+
+.navigation__links:hover::before,
+.navigation__links:active::before,
+.navigation__links:hover::after,
+.navigation__links:active::after {
+    transform: scaleX(1);
+}
+
+.container {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 75vh;
 }
 
-h1 {
+.container__title {
     padding: 0.5em;
 }
 
@@ -27,40 +68,9 @@ input {
     margin-bottom: 1em;
 }
 
-i {
-    margin: 10px;
-    color: #17729b;
-    width: 15px;
-    height: 15px;
-}
-
 #bio {
     display: block;
     width: 100%;
     resize: vertical;
     padding: 8px;
-}
-
-button {
-    text-align: center;
-    text-decoration: none;
-    padding: 1em 3.5em;
-    margin: 0.5em 8em;
-    background-color: #3a8fc6;
-    border-radius: 10px;
-    border: 1px solid #17729b;
-    cursor: pointer;
-    color: #ffffff;
-    font-family: Arial;
-    text-decoration: none;
-    text-shadow: 0px 1px 0px #1e5e87;
-}
-
-button:hover {
-    background-color: #45a2d6;
-}
-
-button:active {
-    position: relative;
-    top: 1px;
 }

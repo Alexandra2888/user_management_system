@@ -14,15 +14,14 @@
 </head>
 
 <body>
-  <nav>
-    <div class="container">
-      <a href="pages/register.html">Register</a>
-      <a href="pages/login.html">Login</a>
+  <nav class="navigation">
+    <div class="navigation__container">
+      <a href="pages/register.html" class="navigation__container--links">Register</a>
+      <a href="pages/login.html" class="navigation__container--links">Login</a>
     </div>
   </nav>
-  <main>
-    <h1>Welcome to User Management System</h1>
-
+  <main class="container">
+    <h1 class="container__title">Welcome to User Management System</h1>
   </main>
 </body>
 

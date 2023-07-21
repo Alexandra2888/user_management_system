@@ -1,0 +1,33 @@
+Proiect PHP: 
+Să se creeze un sistem de gestionare a utilizatorilor cu următoarele funcționalități:
+
+Înregistrarea unui utilizator nou.
+Autentificarea utilizatorilor existenți.
+Afisarea profilului utilizatorului.
+Editarea profilului utilizatorului.
+Ștergerea unui utilizator.
+Cerințe tehnice:
+Utilizarea limbajului PHP în stil procedural.
+Utilizarea unei baze de date MySQL pentru stocarea informațiilor despre utilizatori și profiluri.
+Utilizarea formularului HTML pentru înregistrare, autentificare și editare profil.
+Interacțiunea cu baza de date trebuie să se facă prin intermediul extensiei mysqli.
+Barem și punctaj:
+Crearea structurii bazei de date (users și profiles) - 15 puncte.
+Tabela users trebuie să aibă coloanele: id (cheie primară, auto-increment), username, password.
+Tabela profiles trebuie să aibă coloanele: id (cheie primară, auto-increment), user_id (cheie externă către tabela users), full_name, email, age, bio.
+Pagina de înregistrare (register.php) - 20 puncte.
+Formular de înregistrare care cere un username, o parolă, numele complet, adresa de email, vârsta și o biografie.
+Verificarea existenței username-ului în baza de date și afișarea unui mesaj de eroare dacă deja există.
+Salvarea utilizatorului nou înregistrat și a profilului asociat în baza de date.
+Pagina de autentificare (login.php) - 20 puncte.
+Formular de autentificare care cere un username și o parolă.
+Verificarea corectitudinii datelor introduse și afișarea unui mesaj de eroare în caz de eșec.
+Salvarea sesiunii utilizatorului autentificat.
+Pagina de afișare a profilului (profile.php) - 15 puncte.
+Afișarea informațiilor din profilul utilizatorului autentificat.
+Pagina de editare a profilului (edit_profile.php) - 20 puncte.
+Formular de editare a informațiilor din profilul utilizatorului.
+Actualizarea informațiilor în baza de date după confirmarea modificărilor.
+Funcționalitatea de ștergere a unui utilizator (delete.php) - 15 puncte.
+Permite ștergerea unui utilizator și a profilului asociat din baza de date.
+Stilizare CSS și aspect general - 15 puncte.

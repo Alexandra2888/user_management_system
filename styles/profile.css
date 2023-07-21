@@ -1,10 +1,10 @@
-nav {
+.navigation {
     display: flex;
     justify-content: end;
     padding: 1em;
 }
 
-nav a {
+.navigation__link {
     text-decoration: none;
     color: var(--black);
     font-size: 1.1rem;
@@ -14,14 +14,14 @@ nav a {
     font-size: calc(1rem + 0.66667vw);
 }
 
-nav a:last-child {
+.navigation__link:last-child {
     margin-right: 3.5em;
 }
 
-nav a:link::before,
-nav a:visited::before,
-nav a:link::after,
-nav a:visited::after {
+.navigation__link:link::before,
+.navigation__link:visited::before,
+.navigation__link:link::after,
+.navigation__link:visited::after {
     content: "";
     position: absolute;
     left: 0;
@@ -34,57 +34,38 @@ nav a:visited::after {
     transition: transform 0.6s cubic-bezier(1, 0, 0, 1);
 }
 
-nav a:link::before,
-nav a:visited::before {
+.navigation__link:link::before,
+.navigation__link:visited::before {
     top: 0;
     transform-origin: left;
 }
 
-nav a:link::after,
-nav a:visited::after {
+.navigation__link:link::after,
+.navigation__link:visited::after {
     bottom: 0;
     transform-origin: right;
 }
 
-nav a:hover::before,
-nav a:active::before,
-nav a:hover::after,
-nav a:active::after {
+.navigation__link:hover::before,
+.navigation__link:active::before,
+.navigation__link:hover::after,
+.navigation__link:active::after {
     transform: scaleX(1);
 }
 
-main {
+.main {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 }
 
-h1 {
-    padding: 0.5em;
-}
-
-button {
-    text-align: center;
-    text-decoration: none;
+.main__container {
     padding: 1em;
-    margin-bottom: 1em;
-    background-color: var(--mediumBlue);
-    border-radius: 0.625rem;
-    border: 1px solid var(--darkBlue);
-    cursor: pointer;
-    color: var(--white);
-    text-decoration: none;
-    text-shadow: 0px 1px 0px var(--lightBlue);
 }
 
-button:hover {
-    background-color: var(--btnHover);
-}
-
-button:active {
-    position: relative;
-    top: 1px;
+.main__title {
+    padding: 0.5em;
 }
 
 p {
@@ -93,7 +74,7 @@ p {
     font-size: 1.3rem;
 }
 
-
-.container {
-    padding: 1em;
+.profile {
+    padding: 1em !important;
+    margin: 0.5em !important;
 }

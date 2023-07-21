@@ -14,39 +14,39 @@
 </head>
 
 <body>
-    <nav>
-        <a href="login.html">Login</a>
-        <a href="../index.php">Home</a>
+    <nav class="navigation">
+        <a href="../index.php" class="navigation__links">Home</a>
+        <a href="login.html"  class="navigation__links">Login</a>
     </nav>
-    <main>
-    <h1>Register</h1>
+    <main class="container">
+    <h1 class="container__title">Register</h1>
     <?php if (isset($error)) { ?>
         <p style="color: red;">
             <?php echo htmlspecialchars($error); ?>
         </p>
     <?php } ?>
     <form method="POST" action="../scripts/register.php">
-        <label for="username"><i class="fas fa-user"></i>Username:</label>
-        <input type="text" id="username" name="username" required>
+        <label for="username"><i class="fas fa-user i"></i>Username:</label>
+        <input type="text" id="username" name="username" minlength="3" required>
         <br>
-        <label for="password"><i class="fas fa-lock"></i>Password:</label>
+        <label for="password"><i class="fas fa-lock i"></i>Password:</label>
         <input type="password" id="password" name="password" required>
         <br>
-        <label for="full_name"><i class="fas fa-user"></i>Full Name:</label>
-        <input type="text" id="full_name" name="full_name" required>
+        <label for="full_name"><i class="fas fa-user i"></i>Full Name:</label>
+        <input type="text" id="full_name" name="full_name" minlength="3" required>
         <br>
-        <label for="email"><i class="fa fa-envelope" aria-hidden="true"></i>
+        <label for="email"><i class="fa fa-envelope i" aria-hidden="true"></i>
             Email:</label>
         <input type="email" id="email" name="email" required>
         <br>
-        <label for="age"><i class="fa fa-birthday-cake" aria-hidden="true"></i>Age:</label>
-        <input type="number" id="age" name="age" required>
+        <label for="age"><i class="fa fa-birthday-cake i" aria-hidden="true"></i>Age:</label>
+        <input type="number" id="age" name="age" min="12" required>
         <br>
-        <label for="bio"><i class="fa fa-info-circle" aria-hidden="true"></i>
+        <label for="bio"><i class="fa fa-info-circle i" aria-hidden="true"></i>
             Bio:</label>
-        <textarea id="bio" name="bio" rows="10" required></textarea>
+        <textarea id="bio" name="bio" rows="10" minlength="3" required></textarea>
         <br>
-        <button type="submit" id="submit">Submit</button>
+        <button type="submit" id="submit" class="btn">Submit</button>
     </form>
     <br>
 </main>

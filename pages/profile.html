@@ -13,20 +13,20 @@
 </head>
 
 <body>
-    <nav>
-        <a href="../scripts/logout.php">Logout</a>
+    <nav class="navigation">
+        <a href="../scripts/logout.php" class="navigation__link">Logout</a>
     </nav>
-    <main>
-        <h1>Profile</h1>
-        <div class="container">
+    <main class="main">
+        <h1 class="main__title">Profile</h1>
+        <div class="main__container">
             <p><strong>Full Name:</strong> <span id="username"></span></p>
             <p><strong>Email:</strong> <span id="email"></span></p>
             <p><strong>Age:</strong> <span id="age"></span></p>
             <p><strong>Bio:</strong> <span id="bio"></span></p>
         </div>
         <div>
-            <button onclick="confirmEdit()">Edit Profile</button>
-            <button onclick="confirmDelete()">Delete Account</button>
+            <button onclick="confirmEdit()" class="btn profile">Edit Profile</button>
+            <button onclick="confirmDelete()" class="btn profile">Delete Account</button>
         </div>
     </main>
 
