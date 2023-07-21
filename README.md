@@ -2,6 +2,17 @@
 
 This is a simple user management system built with PHP and MySQL. It allows users to register, login, view their profile, edit their profile, and delete their account.
 
+<img src="assets/lighthouse.png" alt="lighthouse">
+
+
+# Screenshots:
+
+<img src="assets/home.png" alt="home">
+<img src="assets/login.png" alt="login">
+<img src="assets/register.png" alt="register">
+<img src="assets/profile.png" alt="profile">
+<img src="assets/edit.png" alt="edit profile">
+
 # Repo:
 
 https://github.com/Alexandra2888/user_management_system
